@@ -60,12 +60,16 @@ object Part1 {
             pairs <- sequence(inputs.map(lineToPolicyPair).toList)
         } yield countValidPairs(pairs, isValid)
     }
+
+    def printValidCount(isValid: (PolicyPair) => Boolean): Unit = {
+        val result: String = (Part1.getCount(isValid)) match {
+            case Some(res) => res.toString
+            case None => "Something broke"
+        }
+        println(result)
+    }
 }
 
 object Main1 extends App {
-    val result: String = (Part1.getCount(Part1.isValid)) match {
-        case Some(res) => res.toString
-        case None => "Something broke"
-    }
-    println(result)
+    Part1.printValidCount(Part1.isValid)
 }
