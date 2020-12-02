@@ -21,7 +21,7 @@ def find2NumbersThatSumTo(goal, numbers, start):
         return False
 
 def main():
-    filename = "input.txt"
+    filename = "../../inputs/day1.txt"
     numbers = sorted(getInput(filename))
     result = find2NumbersThatSumTo(2020, numbers, 0)
     if (result == False):
