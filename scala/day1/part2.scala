@@ -1,7 +1,7 @@
 package com.rjhallsted.adventOfCode2020.day1
 
 object Part2 {
-    def find3NumbersThatSumTo(goal: Int, numbers: List[Int]): Option[(Int, Int, Int)] = {
+    def find3NumbersThatSumTo(goal: Int, numbers: Array[Int]): Option[(Int, Int, Int)] = {
         def inner(currentIndex: Int): Option[(Int, Int, Int)] = {
             if (currentIndex == numbers.length - 3) {
                 return None

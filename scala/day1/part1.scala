@@ -3,10 +3,10 @@ package com.rjhallsted.adventOfCode2020.day1
 import scala.io.Source
 
 object Part1 {
-    def getInputs(filepath: String): List[Int] =    
-        Source.fromFile(filepath).getLines().map(_.toInt).toList
+    def getInputs(filepath: String): Array[Int] =    
+        Source.fromFile(filepath).getLines().map(_.toInt).toArray
 
-    def find2NumbersThatSumTo(goal: Int, numbers: List[Int], start: Int): Option[(Int, Int)] = {
+    def find2NumbersThatSumTo(goal: Int, numbers: Array[Int], start: Int): Option[(Int, Int)] = {
         def inner(start: Int, end: Int): Option[(Int, Int)] = {
             if (start == end) {
                 return None
