@@ -21,6 +21,14 @@ def countTrees(lines, slope: tuple) -> int:
 
 if __name__ == '__main__':
     lines = getInput('../../inputs/day3.txt')
-    slope = (3,1)
-    print(countTrees(lines[1:], slope))
+    lines = lines[1:]
+
+    def ct(slope: tuple):
+        return countTrees(lines, slope)
+
+    slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+    totals = list(map(ct, slopes))
+    print(totals)
+    result = functools.reduce(lambda x,y: x*y, totals)
+    print(result)
     
