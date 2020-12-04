@@ -27,8 +27,6 @@ if __name__ == '__main__':
         return countTrees(lines, slope)
 
     slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
-    totals = list(map(ct, slopes))
-    print(totals)
-    result = functools.reduce(lambda x,y: x*y, totals)
+    result = functools.reduce(lambda x,y: x*y, map(ct, slopes))
     print(result)
     
