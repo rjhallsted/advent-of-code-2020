@@ -4,3 +4,4 @@ scala/*/.bsp/
 scala/*/project/
 scala/*/target/
 node_modules/
+typescript/*/lib/
