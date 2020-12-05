@@ -1,9 +1,6 @@
-import { reduce, map } from 'fp-ts/lib/Array'
 import * as R from 'ramda'
 import * as fs from 'fs'
 import { pipe } from 'fp-ts/lib/function'
-import { parse } from 'path'
-import { isIPv4 } from 'net'
 
 async function getInput(file: string): Promise<string> {
     const contents = await fs.promises.readFile(file)
