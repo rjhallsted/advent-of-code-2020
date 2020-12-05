@@ -1,7 +1,15 @@
-.metals/
 .vscode/
+
+# typescript artifacts
+node_modules/
+typescript/*/lib
+
+# scala build artificats
+.bloop/
+.bsp/
+project/
+target/
+.metals/
 scala/*/.bsp/
 scala/*/project/
 scala/*/target/
-node_modules/
-typescript/*/lib
