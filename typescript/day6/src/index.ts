@@ -2,7 +2,7 @@ import * as R from 'ramda'
 import * as fs from 'fs'
 import * as readline from 'readline'
 import { pipe } from 'fp-ts/function'
-import * as S from 'fp-ts/Set'
+import * as A from 'fp-ts/Array'
 
 function getInputReadline(file: string): readline.Interface {
     const stream = fs.createReadStream(file)
@@ -57,9 +57,42 @@ function countYeses(group: string): number {
 
 function functionalSumGroupYeses(input: string): number {
     return pipe(
-        input,
-        R.split('\n\n'),
+        input.split('\n\n'),
         R.map(countYeses),
+        R.sum
+    )
+}
+
+function lineToSet(line: string): Set<string> {
+    return R.pipe(
+        R.split(''),
+        R.reduce((a: Set<string>, c: string) => addToSet(c)(a), new Set())
+    )(line)
+}
+
+function intersection(a: Set<string>, b: Set<string>): Set<string> {
+    return new Set(
+        [...a].filter(x => b.has(x))
+    )
+}
+
+function reduceByIntersection(sets: Set<string>[]): Set<string> {
+    return sets.reduce(intersection)
+}
+
+function getGroupOverlappingSets(input: string): Set<string> {
+    return pipe(
+        input.split('\n'),
+        R.map(lineToSet),
+        reduceByIntersection
+    )
+}
+
+function functionalSumGroupOverlappingYeses(input: string): number {
+    return pipe(
+        input.split('\n\n'),
+        R.map(getGroupOverlappingSets),
+        R.map((a: Set<string>) => a.size),
         R.sum
     )
 }
@@ -74,14 +107,11 @@ async function handler1(file: string): Promise<void> {
     console.log(functionalResult)
 }
 
-// async function handler2(file: string): Promise<void> {
-//     const input = await getInput(file)
-
-//     const seats = input.map(lineToSeatNumber).sort((a,b) => a - b)
-//     const yourSeat = findMissing(seats)
-
-//     console.log(yourSeat)
-// }
+async function handler2(file: string): Promise<void> {
+    const inputString = await getInputString(file)
+    const functionalResult = functionalSumGroupOverlappingYeses(inputString)
+    console.log(functionalResult)
+}
 
 const file = '../../inputs/day6.txt'
-handler1(file)
+handler1(file).then(() => handler2(file)) 
